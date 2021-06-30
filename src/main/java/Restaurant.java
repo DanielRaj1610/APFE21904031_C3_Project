@@ -60,4 +60,7 @@ public class Restaurant {
         return name;
     }
 
+    public String getLocation() {
+        return location;
+    }
 }

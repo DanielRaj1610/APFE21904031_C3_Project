@@ -4,6 +4,8 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,10 +16,12 @@ class RestaurantServiceTest {
     Restaurant restaurant;
     LocalTime openingTime = LocalTime.parse("10:30:00");
     LocalTime closingTime = LocalTime.parse("22:00:00");
+
     //REFACTOR ALL THE REPEATED LINES OF CODE
     @BeforeEach
     public void setUp() {
         restaurant = service.addRestaurant("Amelie's cafe", "Chennai", openingTime, closingTime);
+        restaurant = service.addRestaurant("Amelie's", "Chennai", openingTime, closingTime);
         restaurant.addToMenu("Sweet corn soup", 119);
         restaurant.addToMenu("Vegetable lasagne", 269);
     }
@@ -42,9 +46,15 @@ class RestaurantServiceTest {
     }
 
     @Test
-    public void searching_for_existing_restaurants_in_a_given_location_return_list_of_restaurant_object(){
-        RestaurantService restaurantService = Mockito.mock(RestaurantService.class);
-        restaurantService.findRestaurantByLocation("Chennai");
+    public void searching_for_existing_restaurants_in_a_given_location_return_list_of_restaurant_object() {
+
+        List<Restaurant> restaurantList = new ArrayList<>();
+        restaurantList.add(new Restaurant("Amelie's cafe", "Chennai", openingTime, closingTime));
+        restaurantList.add(new Restaurant("Amelie's", "Chennai", openingTime, closingTime));
+
+        RestaurantService restaurantService  = Mockito.spy(service);
+
+        assertEquals(restaurantService.findRestaurantByLocation("Chennai"), service.findRestaurantByLocation("Chennai"));
     }
 
     //<<<<<<<<<<<<<<<<<<<<SEARCHING>>>>>>>>>>>>>>>>>>>>>>>>>>

@@ -32,4 +32,15 @@ public class RestaurantService {
     public List<Restaurant> getRestaurants() {
         return restaurants;
     }
+
+    public List<Restaurant> findRestaurantByLocation(String location) {
+        List<Restaurant> original = restaurants;
+        List<Restaurant> filtered = new ArrayList<>();
+        for (Restaurant res : original) {
+            if (res.getLocation().toString().equals(location)) {
+                filtered.add(res);
+            }
+        }
+        return filtered;
+    }
 }
