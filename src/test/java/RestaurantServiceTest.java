@@ -40,6 +40,13 @@ class RestaurantServiceTest {
         assertThrows(restaurantNotFoundException.class, () -> service.findRestaurantByName("Pantry d'or"));
 
     }
+
+    @Test
+    public void searching_for_existing_restaurants_in_a_given_location_return_list_of_restaurant_object(){
+        RestaurantService restaurantService = Mockito.mock(RestaurantService.class);
+        restaurantService.findRestaurantByLocation("Chennai");
+    }
+
     //<<<<<<<<<<<<<<<<<<<<SEARCHING>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 
