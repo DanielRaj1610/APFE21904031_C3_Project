@@ -32,20 +32,31 @@ class RestaurantTest {
     @Test
     public void is_restaurant_open_should_return_true_if_time_is_between_opening_and_closing_time() {
 
-        Restaurant spyRes  = Mockito.spy(restaurant);
+        Restaurant spyRes = Mockito.spy(restaurant);
         Mockito.when(spyRes.getCurrentTime()).thenReturn(currentMockInsideTime);
         assertTrue(spyRes.isRestaurantOpen());
     }
 
     @Test
     public void is_restaurant_open_should_return_false_if_time_is_outside_opening_and_closing_time() {
-        //WRITE UNIT TEST CASE HERE
-        Restaurant spyRes  = Mockito.spy(restaurant);
+        Restaurant spyRes = Mockito.spy(restaurant);
         Mockito.when(spyRes.getCurrentTime()).thenReturn(currentMockOutsideTime);
         assertFalse(spyRes.isRestaurantOpen());
     }
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<OPEN/CLOSED>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    //>>>>>>>>>>>>>>>>>>>>>>>>>Price<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+    @Test
+    public void addSelectedItems_that_does_not_exist_in_menu_should_throw_exception(){
+        Item item = new Item("briyani",250);
+        assertThrows(itemNotFoundException.class,
+                () -> restaurant.addSelectedItems(item));
+
+    }
+
+    //<<<<<<<<<<<<<<<<<<<<<<<<<Price>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>MENU<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -70,4 +81,6 @@ class RestaurantTest {
                 () -> restaurant.removeFromMenu("French fries"));
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
 }

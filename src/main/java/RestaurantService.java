@@ -11,7 +11,6 @@ public class RestaurantService {
             if (res.getName().equals(restaurantName)) {
                 return res;
             }
-
         }
         throw new restaurantNotFoundException(restaurantName);
     }
@@ -43,4 +42,6 @@ public class RestaurantService {
         }
         return filtered;
     }
+
+
 }
